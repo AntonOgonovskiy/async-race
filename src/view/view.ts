@@ -2,7 +2,7 @@ import { ICar } from "../interfaces/interfaces";
 import { createCarImage } from "../model/cars";
 import { storage } from "../model/storage";
 
-export function renderCar({ id, name, color, isEngineStarted }: ICar) {
+export function renderCar({ id, name, color }: ICar) {
   ` <div class="car-buttons">
   <button class="button car-button" id="update-car-${id}">Update</button>
   <button class="button car-button" id="remove-car-${id}>Remove</button>
@@ -11,8 +11,8 @@ export function renderCar({ id, name, color, isEngineStarted }: ICar) {
 <div class="car-wrapper">
   <div class="car">
     <div class="start-buttons">
-      <button class="small-button engine" id="start-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>Go</button>
-      <button class="small-button engine" id="stop-engine-car-${id}" ${!isEngineStarted ? 'disabled' : ''}>Stop</button>
+      <button class="small-button engine" id="start-engine-car-${id}">Go</button>
+      <button class="small-button engine" id="stop-engine-car-${id}"}>Stop</button>
     </div>
     <div class="car" id="car-${id}">
       ${createCarImage(color)}
@@ -44,7 +44,7 @@ function renderWinners() {
       <th id="sort-time" class = "table-button table-time" ${storage.sort === 'wins' ? storage.sortOrder : ''}>Time</th>
     </thead>
     <tbody>
-      ${storage.winner.map((winner, i) => `
+      ${storage.winners.map((winner, i) => `
       <tr>
         <td>${i + 1}</td>
         <td>${createCarImage(winner.car.color)}</td>

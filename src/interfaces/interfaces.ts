@@ -2,13 +2,12 @@ export interface ICar {
   id: number;
   name: string;
   color: string;
-  isEngineStarted: boolean
 }
 export interface IStorage {
   garagePage: number;
   winnersPage: number;
   cars: ICar[];
-  winner: {
+  winners: {
     id: number;
     wins: number;
     time: number;
@@ -19,4 +18,19 @@ export interface IStorage {
   view: string;
   sort: string;
   sortOrder: string;
+}
+export interface ICarCreate {
+  name: string,
+  color: string
+}
+export interface IWinner {
+  id: number,
+  wins: number,
+  time: number
+}
+export interface IWinners {
+  page: number,
+  limit: number,
+  sort: string,
+  order: string
 }

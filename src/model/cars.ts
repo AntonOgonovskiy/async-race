@@ -1,13 +1,13 @@
 const names: String[] = ['Audi', 'BMW', 'Mercedes', 'Alpina', 'Dodge', 'Ford', 'Infinity', 'Lexus', 'Mitsubishi', 'Subaru'];
 const models: String[] = ['Q8', 'M3', 'E55 AMG', 'B5', 'Charger', 'GT', 'QX', 'LFA', 'Lancer', 'BRZ'];
 
-function getRandomName(): string {
+export function getRandomName(): string {
   const name = names[Math.floor(Math.random() * names.length)];
   const model = models[Math.floor(Math.random() * models.length)];
   return `${name} ${model}`
 }
 
-function getRandomColor(): string {
+export function getRandomColor(): string {
   const letters = '0123456789ABCDEF';
   let color = '#';
   for (let i = 0; i < 6; i++) {
@@ -39,5 +39,5 @@ export function createCarImage(color: string) {
   </svg>`
 }
 export function generateCars(count = 100) {
-  return new Array(count).fill(1).map((el) => ({ name: getRandomName(), color: getRandomColor() }));
+  return new Array(count).fill(1).map((_) => ({ name: getRandomName(), color: getRandomColor() }));
 }
