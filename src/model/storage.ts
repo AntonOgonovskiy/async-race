@@ -1,4 +1,4 @@
-import { IStorage } from "./interfaces/interfaces";
+import { IStorage } from "../interfaces/interfaces";
 
 export const storage: IStorage = {
   garagePage: 1,
