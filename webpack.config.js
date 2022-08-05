@@ -28,4 +28,7 @@ module.exports = {
       title: "Async-Race"
     }),
   ],
+  experiments: {
+    topLevelAwait: true
+  }
 };

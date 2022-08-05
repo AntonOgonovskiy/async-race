@@ -3,27 +3,28 @@ import { createCarImage } from "../model/cars";
 import { storage } from "../model/storage";
 
 export function renderCar({ id, name, color }: ICar) {
-  ` <div class="car-buttons">
-  <button class="button car-button" id="update-car-${id}">Update</button>
-  <button class="button car-button" id="remove-car-${id}>Remove</button>
-  <p class=" car-name">${name}</p>
-</div>
-<div class="car-wrapper">
-  <div class="car">
-    <div class="start-buttons">
-      <button class="small-button engine" id="start-engine-car-${id}">Go</button>
-      <button class="small-button engine" id="stop-engine-car-${id}"}>Stop</button>
+  return (`
+    <div class="car-buttons">
+      <button class="button car-button" id="update-car-${id}">Update</button>
+      <button class="button car-button" id="remove-car-${id}">Remove</button>
+      <p class="car-name"> ${name} </p>
     </div>
-    <div class="car" id="car-${id}">
-      ${createCarImage(color)}
-    </div>
-  </div>
-  <div class="flag-${id}">&#127988;</div>
-</div>`
+    <div class="car-wrapper">
+      <div class="car">
+        <div class="start-buttons">
+          <button class="small-button engine" id="start-engine-car-${id}">Go</button>
+          <button class="small-button engine" id="stop-engine-car-${id}"}>Stop</button>
+        </div>
+        <div class="car" id="car-${id}">
+          ${createCarImage(color)}
+        </div>
+      </div>
+      <div class="flag-${id}">&#127988;</div>
+    </div>`)
 }
 
 function renderGarage() {
-  `<h1>Garage (${storage.carsCount})</h1>
+  return `<h1>Garage (${storage.carsCount})</h1>
   <h2>Page №${storage.garagePage}</h2>
   <ul>
     ${storage.cars.map((car) => `
@@ -33,7 +34,7 @@ function renderGarage() {
 }
 
 function renderWinners() {
-  `<h1>Winners (${storage.winnersCount})</h1>
+  return `<h1>Winners (${storage.winnersCount})</h1>
   <h2>Page №${storage.winnersPage}</h2>
   <table>
     <thead>
@@ -57,7 +58,7 @@ function renderWinners() {
   `
 }
 
-export function renderPage() {
+export async function renderPage() {
   const page: string = `
   <div class="page-button">
     <button class="button garage-page-button" id="garage-page-btn">Garage</button>
@@ -86,7 +87,7 @@ export function renderPage() {
     </div>
   </div>
   <div class="winners">
-    ${renderWinners()}
+    
   </div>
   <div class="pagination">
     <button class="button" disabled id="prev-btn">prev</button>
