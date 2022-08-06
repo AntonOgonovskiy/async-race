@@ -81,14 +81,33 @@ h2 {
   margin-right: 3px;
 }
 
-.car-img {
+svg {
   width: 60px;
+}
+
+.car-road {
+  width: calc(100vw - 60px);
 }
 
 .small-button:nth-child(1) {
   margin-bottom: 5px;
 }
 
+.rider {
+  animation-timing-function: linear;
+}
+
 .flag {
-  margin-right: 70px;
+  position: absolute;
+  right: 70px;
+}
+
+@keyframes car-animation {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(95%);
+  }
 }

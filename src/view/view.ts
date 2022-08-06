@@ -12,11 +12,13 @@ export function renderCar({ id, name, color }: ICar) {
     <div class="car-wrapper">
       <div class="car">
         <div class="start-buttons">
-          <button class="small-button engine" id="start-engine-car-${id}">Go</button>
-          <button class="small-button engine" id="stop-engine-car-${id}"}>Stop</button>
+          <button class="small-button start-engine-btn" id="start-engine-car-${id}">Go</button>
+          <button class="small-button stop-engine-btn" id="stop-engine-car-${id}"}>Stop</button>
         </div>
-        <div class="car-img" id="car-${id}">
-          ${createCarImage(color)}
+        <div class="car-road">
+          <div class="rider"id="car-${id}">
+            ${createCarImage(color)}
+          </div>
         </div>
       </div>
       <div class="flag flag-${id}">&#127988;</div>

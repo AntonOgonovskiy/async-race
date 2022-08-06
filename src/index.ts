@@ -1,4 +1,6 @@
 import { renderPage } from "./view/view";
 import "./styles/style.css"
-renderPage()
+import * as listeners from "./controller/listeners/listeners"
 
+renderPage()
+listeners.go()

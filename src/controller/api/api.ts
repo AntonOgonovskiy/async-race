@@ -88,3 +88,24 @@ export async function updateWinner(id: number, body: IWinner) {
   })
   return response.json()
 }
+
+export async function startEngine(id: number) {
+  const response = await fetch(`${engine}?id=${id}&status=started`, {
+    method: 'PATCH'
+  });
+  return response.json();
+}
+
+export async function stopEngine(id: number) {
+  const response = await fetch(`${engine}?id=${id}&status=stopped`, {
+    method: 'PATCH'
+  });
+  return response.json();
+}
+
+export async function getDrive(id: number) {
+  const response = await fetch(`${engine}?id=${id}&status=drive`, {
+    method: 'PATCH'
+  });
+  return response.json();
+}
