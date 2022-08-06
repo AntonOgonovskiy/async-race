@@ -1,5 +1,5 @@
-import { ICar, ICarCreate, IWinner, IWinners } from "../interfaces/interfaces";
-import { storage } from "../model/storage";
+import { ICar, ICarCreate, IWinner, IWinners } from "../../interfaces/interfaces";
+import { storage } from "../../model/storage";
 
 const server = 'http://127.0.0.1:3000'
 const garage = `${server}/garage`;

@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 10px;
+}
+
+.button {
+  height: 1, 5%;
+  text-align: center;
+}
+
+.page-button,
+.race-control-buttons {
+  margin-bottom: 20px;
+}
+
+.garage-page-button,
+.winner-page-button {
+  margin-right: 10px
+}
+
+.form {
+  height: 1rem;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form *,
+.race-control-buttons * {
+  height: 100%;
+  margin-right: 10px;
+}
+
+.input {
+  border: 1px solid black;
+}
+
+li {
+  list-style: none;
+}
+
+.car-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.car-buttons * {
+  margin-right: 5px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.car-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.car {
+  display: flex;
+  flex-direction: row;
+}
+
+.start-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 3px;
+}
+
+.car-img {
+  width: 60px;
+}
+
+.small-button:nth-child(1) {
+  margin-bottom: 5px;
+}
+
+.flag {
+  margin-right: 70px;
+}

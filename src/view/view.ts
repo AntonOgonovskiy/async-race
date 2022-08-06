@@ -3,7 +3,7 @@ import { createCarImage } from "../model/cars";
 import { storage } from "../model/storage";
 
 export function renderCar({ id, name, color }: ICar) {
-  return (`
+  return `
     <div class="car-buttons">
       <button class="button car-button" id="update-car-${id}">Update</button>
       <button class="button car-button" id="remove-car-${id}">Remove</button>
@@ -15,12 +15,12 @@ export function renderCar({ id, name, color }: ICar) {
           <button class="small-button engine" id="start-engine-car-${id}">Go</button>
           <button class="small-button engine" id="stop-engine-car-${id}"}>Stop</button>
         </div>
-        <div class="car" id="car-${id}">
+        <div class="car-img" id="car-${id}">
           ${createCarImage(color)}
         </div>
       </div>
-      <div class="flag-${id}">&#127988;</div>
-    </div>`)
+      <div class="flag flag-${id}">&#127988;</div>
+    </div>`
 }
 
 function renderGarage() {
@@ -67,7 +67,7 @@ export async function renderPage() {
   <div class="garage">
     <div class="car-creator">
       <form class="form" id="create">
-        <input class="input" type="text" name="name" id="create-name">
+        <input class="input" type="text" name="name" id="create-name" autocomplete="off">
         <input type="color" name="color" id="create-color" value="#ffffff">
         <button class="button" id="create-btn">Create</button>
       </form>

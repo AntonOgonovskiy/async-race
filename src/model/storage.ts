@@ -1,6 +1,5 @@
 import { IStorage } from "../interfaces/interfaces";
-import { getCars, getWinners } from "../api/api";
-import { time } from "console";
+import { getCars, getWinners } from "../controller/api/api";
 
 const { cars: cars, count: carsCount } = await getCars(1)
 const { winners: winners, count: winnersCount } = await getWinners({ page: 1, limit: 10, sort: "time", order: "asc" })
