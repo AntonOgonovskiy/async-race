@@ -80,8 +80,8 @@ export async function renderPage() {
       </form>
     </div>
     <div class="race-control-buttons">
-      <button class="button" id="race">Race</button>
-      <button class="button" id="stop">Stop</button>
+      <button class="button race-btn" id="race">Race</button>
+      <button class="button stop-race-btn" id="stop">Reset</button>
       <button class="button" id="add-car-btn">Add cars</button>
     </div>
     <div class="cars">

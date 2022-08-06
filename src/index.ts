@@ -4,3 +4,4 @@ import * as listeners from "./controller/listeners/listeners"
 
 renderPage()
 listeners.engine()
+listeners.racing()

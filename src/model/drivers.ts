@@ -1,4 +1,5 @@
 import { getDrive, startEngine, stopEngine } from "../controller/api/api";
+import { storage } from "./storage";
 
 export async function startDrive(id: number) {
   const startBtn = document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement;
@@ -28,4 +29,12 @@ export async function stopDrive(id: number) {
   const stopBtn = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
   startBtn.disabled = false;
   stopBtn.disabled = true;
+}
+
+export async function race() {
+  storage.cars.map((item) => startDrive(item.id))
+}
+
+export async function stopRace() {
+  storage.cars.map((item) => stopDrive(item.id))
 }
