@@ -106,6 +106,6 @@ export async function stopEngine(id: number) {
 export async function getDrive(id: number) {
   const response = await fetch(`${engine}?id=${id}&status=drive`, {
     method: 'PATCH'
-  });
-  return response.json();
+  }).catch((e) => e.message);
+  return response.status !== 200 ? { "success": false } : { ...(await response.json()) };
 }

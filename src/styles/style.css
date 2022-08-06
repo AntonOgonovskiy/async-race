@@ -94,7 +94,9 @@ svg {
 }
 
 .rider {
+  margin: 0;
   animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .flag {
