@@ -13,7 +13,7 @@ export function renderCar({ id, name, color }: ICar) {
       <div class="car">
         <div class="start-buttons">
           <button class="small-button start-engine-btn" id="start-engine-car-${id}">Go</button>
-          <button class="small-button stop-engine-btn" id="stop-engine-car-${id}"}>Stop</button>
+          <button class="small-button stop-engine-btn" disabled id="stop-engine-car-${id}"}>Stop</button>
         </div>
         <div class="car-road">
           <div class="rider"id="car-${id}">
@@ -81,7 +81,7 @@ export async function renderPage() {
     </div>
     <div class="race-control-buttons">
       <button class="button race-btn" id="race">Race</button>
-      <button class="button stop-race-btn" id="stop">Reset</button>
+      <button class="button stop-race-btn" disabled id="stop">Reset</button>
       <button class="button" id="add-car-btn">Add cars</button>
     </div>
     <div class="cars">

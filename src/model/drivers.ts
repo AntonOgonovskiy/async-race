@@ -32,9 +32,17 @@ export async function stopDrive(id: number) {
 }
 
 export async function race() {
+  const raceBtn = document.getElementById('race') as HTMLButtonElement;
+  raceBtn.disabled = true;
+  const stopBtns = document.getElementById('stop') as HTMLButtonElement;
+  stopBtns.disabled = false;
   storage.cars.map((item) => startDrive(item.id))
 }
 
 export async function stopRace() {
+  const raceBtn = document.getElementById('race') as HTMLButtonElement;
+  raceBtn.disabled = false;
+  const stopBtn = document.getElementById('stop') as HTMLButtonElement;
+  stopBtn.disabled = true;
   storage.cars.map((item) => stopDrive(item.id))
 }

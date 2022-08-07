@@ -86,7 +86,7 @@ svg {
 }
 
 .car-road {
-  width: calc(100vw - 60px);
+  width: calc(100vw - 115px);
 }
 
 .small-button:nth-child(1) {
@@ -110,6 +110,6 @@ svg {
   }
 
   to {
-    transform: translateX(95%);
+    transform: translateX(100%)
   }
 }
