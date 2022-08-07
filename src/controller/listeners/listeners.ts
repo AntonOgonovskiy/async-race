@@ -17,7 +17,7 @@ export const racing = () => {
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLButtonElement
     if (target?.classList.contains("race-btn")) {
-      race();
+      race(startDrive);
     }
     if (target?.classList.contains("stop-race-btn")) {
       stopRace();

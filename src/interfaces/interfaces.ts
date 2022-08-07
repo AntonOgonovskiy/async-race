@@ -34,3 +34,14 @@ export interface IWinners {
   sort: string,
   order: string
 }
+export interface IRace {
+  name?: string;
+  color?: string;
+  id?: number;
+  time: number;
+}
+export interface ISuccess {
+  success: boolean;
+  id: number;
+  time: number;
+}
