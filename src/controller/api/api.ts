@@ -15,12 +15,12 @@ export async function getCars(page: number, limit = 7): Promise<{ cars: ICar[], 
 }
 
 export async function getCar(id: number) {
-  const response = await fetch(`${garage}/:${id}`);
+  const response = await fetch(`${garage}/${id}`);
   return response.json();
 }
 
 export async function deleteCar(id: number) {
-  const response = await fetch(`${garage}/:${id}`, {
+  const response = await fetch(`${garage}/${id}`, {
     method: 'DELETE',
   })
   return response.json()

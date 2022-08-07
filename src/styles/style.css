@@ -61,8 +61,8 @@ h2 {
 .car-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-around;
   height: 60px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -86,7 +86,8 @@ svg {
 }
 
 .car-road {
-  width: calc(100vw - 115px);
+  width: calc(100vw - 80px);
+  position: relative;
 }
 
 .small-button:nth-child(1) {
@@ -94,22 +95,28 @@ svg {
 }
 
 .rider {
-  margin: 0;
+  position: absolute;
+  width: 60px;
+  margin-right: 0;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
+.pagination {
+  margin-top: 20px;
+}
+
 .flag {
   position: absolute;
-  right: 70px;
+  right: 90px;
 }
 
 @keyframes car-animation {
   from {
-    transform: translateX(0%);
+    left: 0%;
   }
 
   to {
-    transform: translateX(100%)
+    left: calc(100% - 60px);
   }
 }

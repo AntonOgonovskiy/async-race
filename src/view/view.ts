@@ -1,12 +1,12 @@
 import { ICar } from "../interfaces/interfaces";
-import { createCarImage } from "../model/cars";
+import { createCarImage, getRandomColor, getRandomName } from "../model/carsCreator";
 import { storage } from "../model/storage";
 
 export function renderCar({ id, name, color }: ICar) {
   return `
     <div class="car-buttons">
-      <button class="button car-button" id="update-car-${id}">Update</button>
-      <button class="button car-button" id="remove-car-${id}">Remove</button>
+      <button class="button update-car-button" id="update-car-${id}">Update</button>
+      <button class="button remove-car-button" id="remove-car-${id}">Remove</button>
       <p class="car-name"> ${name} </p>
     </div>
     <div class="car-wrapper">
@@ -25,7 +25,7 @@ export function renderCar({ id, name, color }: ICar) {
     </div>`
 }
 
-function renderGarage() {
+export function renderGarage() {
   return `<h1>Garage (${storage.carsCount})</h1>
   <h2>Page №${storage.garagePage}</h2>
   <ul>
@@ -69,9 +69,9 @@ export async function renderPage() {
   <div class="garage">
     <div class="car-creator">
       <form class="form" id="create">
-        <input class="input" type="text" name="name" id="create-name" autocomplete="off">
-        <input type="color" name="color" id="create-color" value="#ffffff">
-        <button class="button" id="create-btn">Create</button>
+        <input class="input" type="text" name="name" id="create-name" autocomplete="off" value='${getRandomName()}'>
+        <input type="color" name="color" id="create-color" value="${getRandomColor()}">
+        <button class="button create-car" id="create-btn">Create</button>
       </form>
       <form class="form" id="update">
         <input class="input" type="text" name="name" id="update-name">
@@ -82,7 +82,7 @@ export async function renderPage() {
     <div class="race-control-buttons">
       <button class="button race-btn" id="race">Race</button>
       <button class="button stop-race-btn" disabled id="stop">Reset</button>
-      <button class="button" id="add-car-btn">Add cars</button>
+      <button class="button list-car" id="add-car-btn">Add cars</button>
     </div>
     <div class="cars">
       ${renderGarage()}
