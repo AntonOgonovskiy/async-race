@@ -3,7 +3,7 @@ import { race, startDrive, stopDrive, stopRace } from "../model/carsDrivers";
 import { changeCar, clearInput, disableUpdateInput, enableUpdateInput, fillInput, makeArrOfCars, makeCar, selectCar, updateCarStorage } from "../model/carsGenerator";
 import { storage } from "../model/storage";
 import { renderGarage } from "../view/view";
-import { deleteCar, deleteWinner } from "./api";
+import { checkWinner, deleteCar, deleteWinner } from "./api";
 
 export const engine = () => {
   document.addEventListener('click', (event) => {
@@ -28,7 +28,8 @@ export const racing = () => {
       nextPage.disabled = true;
       prevPage.disabled = true;
       winners.disabled = true;
-      await race(startDrive);
+      const winner = await race(startDrive);
+      await checkWinner(winner)
       const stopBtns = document.getElementById('stop') as HTMLButtonElement;
       stopBtns.disabled = false;
     }

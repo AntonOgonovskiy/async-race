@@ -1,5 +1,5 @@
-import { ICar, ICarCreate, IWinner, IWinners } from "../interfaces/interfaces";
-import { storage } from "../model/storage";
+import { ICar, IRace, ICarCreate, IWinner, IWinners } from "../interfaces/interfaces";
+
 
 const server = 'http://127.0.0.1:3000'
 const garage = `${server}/garage`;
@@ -48,6 +48,28 @@ export async function updateCar(id: number, body: ICarCreate) {
   return response.json()
 }
 
+export async function startEngine(id: number) {
+  const response = await fetch(`${engine}?id=${id}&status=started`, {
+    method: 'PATCH'
+  });
+  return response.json();
+}
+
+export async function stopEngine(id: number) {
+  const response = await fetch(`${engine}?id=${id}&status=stopped`, {
+    method: 'PATCH'
+  });
+  return response.json();
+}
+
+export async function getDrive(id: number) {
+  const response = await fetch(`${engine}?id=${id}&status=drive`, {
+    method: 'PATCH'
+  }).catch((e) => e.message);
+  return response.status !== 200 ? { "success": false } : { ...(await response.json()) };
+}
+
+
 export async function getWinners({ page, limit = 10, sort, order }: IWinners) {
   const response = await fetch(`${winners}?_page=${page}&_limit=${limit}${getSortOrder(sort, order)}`);
   const items = await response.json()
@@ -67,7 +89,7 @@ const getSortOrder = (sort: string, order: string): string => {
   }
 };
 
-export async function getWinner(id: number) {
+export async function getWinner(id: number | undefined) {
   const response = await fetch(`${winners}/${id}`);
   return response.json()
 }
@@ -89,7 +111,7 @@ export async function deleteWinner(id: number) {
   return response.json()
 }
 
-export async function updateWinner(id: number, body: IWinner) {
+export async function updateWinner(id: number | undefined, body: IWinner) {
   const response = await fetch(`${winners}/${id}`, {
     method: "PUT",
     headers: {
@@ -100,23 +122,16 @@ export async function updateWinner(id: number, body: IWinner) {
   return response.json()
 }
 
-export async function startEngine(id: number) {
-  const response = await fetch(`${engine}?id=${id}&status=started`, {
-    method: 'PATCH'
-  });
-  return response.json();
-}
-
-export async function stopEngine(id: number) {
-  const response = await fetch(`${engine}?id=${id}&status=stopped`, {
-    method: 'PATCH'
-  });
-  return response.json();
-}
-
-export async function getDrive(id: number) {
-  const response = await fetch(`${engine}?id=${id}&status=drive`, {
-    method: 'PATCH'
-  }).catch((e) => e.message);
-  return response.status !== 200 ? { "success": false } : { ...(await response.json()) };
+export async function checkWinner({ id, time }: IRace) {
+  const status = (await fetch(`${winners}/${id}`)).status
+  if (status === 404) {
+    await createWinner({ id, wins: 1, time });
+  } else {
+    const winner = await getWinner(id);
+    await updateWinner(id, {
+      id,
+      wins: winner.wins += 1,
+      time: time < winner.time ? time : winner.time
+    })
+  }
 }
