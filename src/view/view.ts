@@ -71,7 +71,7 @@ export async function renderPage() {
       <form class="form" id="create">
         <input class="input" type="text" name="name" id="create-name" autocomplete="off" value='${getRandomName()}'>
         <input type="color" name="color" id="create-color" value="${getRandomColor()}">
-        <button class="button create-car" id="create-btn">Create</button>
+        <button class="button create-car" type="button" id="create-btn">Create</button>
       </form>
       <form class="form" id="update">
         <input class="input" type="text" name="name" id="update-name">
@@ -92,8 +92,8 @@ export async function renderPage() {
     
   </div>
   <div class="pagination">
-    <button class="button" disabled id="prev-btn">prev</button>
-    <button class="button" disabled id="next-btn">next</button>
+    <button class="button prev-btn" id="prev-btn">prev</button>
+    <button class="button next-btn" id="next-btn">next</button>
   </div>`
   const html: HTMLElement = document.createElement('div');
   html.innerHTML = page;

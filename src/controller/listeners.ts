@@ -1,5 +1,7 @@
+import { checkPageButtons } from "../model/pageBtns";
 import { race, startDrive, stopDrive, stopRace } from "../model/carsDrivers";
-import { changeCar, makeArrOfCars, makeCar, selectCar, updateCarStorage } from "../model/carsGenerator";
+import { changeCar, clearInput, disableUpdateInput, enableUpdateInput, fillInput, makeArrOfCars, makeCar, selectCar, updateCarStorage } from "../model/carsGenerator";
+import { storage } from "../model/storage";
 import { renderGarage } from "../view/view";
 import { deleteCar, deleteWinner } from "./api";
 
@@ -17,13 +19,20 @@ export const engine = () => {
   })
 }
 export const racing = () => {
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement
     if (target?.classList.contains("race-btn")) {
-      race(startDrive);
+      const prevPage = document.getElementById('prev-btn') as HTMLButtonElement;
+      const nextPage = document.getElementById('next-btn') as HTMLButtonElement;
+      nextPage.disabled = true;
+      prevPage.disabled = true;
+      await race(startDrive);
+      const stopBtns = document.getElementById('stop') as HTMLButtonElement;
+      stopBtns.disabled = false;
     }
     if (target?.classList.contains("stop-race-btn")) {
       stopRace();
+      checkPageButtons();
     }
   })
 }
@@ -32,29 +41,84 @@ export const carUpdater = () => {
     const target = event.target as HTMLButtonElement
     const div = document.querySelector('.cars');
     if (target?.classList.contains("create-car")) {
-      makeCar()
+      await makeCar();
+      await updateCarStorage();
+      fillInput();
+      if (div) div.innerHTML = renderGarage();
+      checkPageButtons();
     }
     if (target?.classList.contains("remove-car-button")) {
       const id = +target.id.split("remove-car-")[1];
       await deleteCar(id);
-      await deleteWinner(id)
-      await updateCarStorage()
-      if (div) div.innerHTML = renderGarage()
+      await deleteWinner(id);
+      await updateCarStorage();
+      if (div) div.innerHTML = renderGarage();
+      if (storage.garagePage - (storage.carsCount / 7) === 1) {
+        storage.garagePage--;
+        await updateCarStorage();
+        if (div) div.innerHTML = renderGarage();
+      }
+      checkPageButtons();
     }
     if (target?.classList.contains("list-car")) {
       await makeArrOfCars();
-      await updateCarStorage()
-      if (div) div.innerHTML = renderGarage()
+      await updateCarStorage();
+      if (div) div.innerHTML = renderGarage();
     }
     if (target?.classList.contains("update-car-button")) {
       const id = +target.id.split("update-car-")[1];
       selectCar(id);
+      enableUpdateInput()
     }
     if (target?.classList.contains("update-car")) {
-      console.log('hi')
-      await changeCar()
-      await updateCarStorage()
-      if (div) div.innerHTML = renderGarage()
+      await changeCar();
+      await updateCarStorage();
+      if (div) div.innerHTML = renderGarage();
+      clearInput()
+      disableUpdateInput()
+    }
+  })
+}
+export const switchPage = () => {
+  document.addEventListener('click', async (event) => {
+    const target = event.target as HTMLButtonElement;
+    const div = document.querySelector('.cars');
+    if (target?.classList.contains("prev-btn")) {
+      switch (storage.view) {
+        case 'garage': {
+          storage.garagePage--;
+          await updateCarStorage();
+          if (div) div.innerHTML = renderGarage();
+          break;
+        }
+      }
+    }
+    if (target?.classList.contains("next-btn")) {
+      switch (storage.view) {
+        case 'garage': {
+          storage.garagePage++;
+          await updateCarStorage();
+          if (div) div.innerHTML = renderGarage();
+          break;
+        }
+      }
+    }
+  })
+}
+export const pageBtnsCheker = () => {
+  document.addEventListener('click', async (event) => {
+    const target = event.target as HTMLButtonElement;
+    if (target?.classList.contains("prev-btn")) {
+      checkPageButtons()
+    }
+    if (target?.classList.contains("next-btn")) {
+      checkPageButtons()
+    }
+    if (target?.classList.contains("winner-page-button")) {
+      checkPageButtons()
+    }
+    if (target?.classList.contains("garage-page-button")) {
+      checkPageButtons()
     }
   })
 }

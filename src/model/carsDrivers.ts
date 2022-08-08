@@ -36,8 +36,7 @@ export async function stopDrive(id: number) {
 export async function race(callback: (id: number) => Promise<ISuccess>) {
   const raceBtn = document.getElementById('race') as HTMLButtonElement;
   raceBtn.disabled = true;
-  const stopBtns = document.getElementById('stop') as HTMLButtonElement;
-  stopBtns.disabled = false;
+
   const promises = storage.cars.map((item) => callback(item.id));
   const winner = await raceWinner(
     promises,
