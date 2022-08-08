@@ -110,7 +110,6 @@ export const switchPage = () => {
           break;
         }
         case 'winners': {
-          console.log('hi')
           storage.winnersPage++;
           await updateWinnerStorage();
           if (winners) winners.innerHTML = renderWinners();

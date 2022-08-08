@@ -36,6 +36,8 @@ export function renderGarage() {
 }
 
 export function renderWinners() {
+  const pageLimit = 10;
+  const winnerPosition = (i: number) => (pageLimit * (storage.winnersPage - 1)) + i + 1
   return `<h1>Winners (${storage.winnersCount})</h1>
   <h2>Page №${storage.winnersPage}</h2>
   <table>
@@ -49,7 +51,7 @@ export function renderWinners() {
     <tbody>
       ${storage.winners.map((winner, i) => `
       <tr>
-        <td>${i + 1}</td>
+        <td>${winnerPosition(i)}</td>
         <td>${createCarImage(winner.car.color)}</td>
         <td>${winner.car.name}</td>
         <td>${winner.wins}</td>
