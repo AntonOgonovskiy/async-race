@@ -83,13 +83,20 @@ export const carUpdater = () => {
 export const switchPage = () => {
   document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement;
-    const div = document.querySelector('.cars');
+    const garage = document.querySelector('.cars');
+    const winners = document.querySelector('.winners');
     if (target?.classList.contains("prev-btn")) {
       switch (storage.view) {
         case 'garage': {
           storage.garagePage--;
           await updateCarStorage();
-          if (div) div.innerHTML = renderGarage();
+          if (garage) garage.innerHTML = renderGarage();
+          break;
+        }
+        case 'winners': {
+          storage.winnersPage--;
+          await updateWinnerStorage();
+          if (winners) winners.innerHTML = renderWinners();
           break;
         }
       }
@@ -99,7 +106,14 @@ export const switchPage = () => {
         case 'garage': {
           storage.garagePage++;
           await updateCarStorage();
-          if (div) div.innerHTML = renderGarage();
+          if (garage) garage.innerHTML = renderGarage();
+          break;
+        }
+        case 'winners': {
+          console.log('hi')
+          storage.winnersPage++;
+          await updateWinnerStorage();
+          if (winners) winners.innerHTML = renderWinners();
           break;
         }
       }
