@@ -34,6 +34,3 @@ export function checkPageButtons() {
   }
 }
 
-export async function paginator() {
-
-}

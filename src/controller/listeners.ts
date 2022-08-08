@@ -131,11 +131,13 @@ export const selectView = () => {
       storage.view = "garage";
       winner.style.display = "none";
       garage.style.display = "block";
+      checkPageButtons()
     }
     if (target?.classList.contains("winner-page-button")) {
       storage.view = "winners";
       winner.style.display = "block";
       garage.style.display = "none";
+      checkPageButtons()
     }
   })
 }
