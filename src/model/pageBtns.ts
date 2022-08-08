@@ -33,4 +33,11 @@ export function checkPageButtons() {
     nextPage.disabled = false;
   }
 }
-
+export function disableBtnsWhileRace() {
+  const prevPage = document.getElementById('prev-btn') as HTMLButtonElement;
+  const nextPage = document.getElementById('next-btn') as HTMLButtonElement;
+  const winners = document.getElementById('winner-page-btn') as HTMLButtonElement
+  nextPage.disabled = true;
+  prevPage.disabled = true;
+  winners.disabled = true;
+}

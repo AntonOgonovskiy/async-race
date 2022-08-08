@@ -81,7 +81,7 @@ export async function getWinners({ page, limit = 10, sort, order }: IWinners) {
   }
 }
 
-const getSortOrder = (sort: string, order: string): string => {
+const getSortOrder = (sort: string | undefined, order: string | undefined): string => {
   if (sort && order) {
     return `&_sort=${sort}&_order=${order}`;
   } else {

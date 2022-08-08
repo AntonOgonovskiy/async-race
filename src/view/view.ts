@@ -35,7 +35,7 @@ export function renderGarage() {
   </ul>`
 }
 
-function renderWinners() {
+export function renderWinners() {
   return `<h1>Winners (${storage.winnersCount})</h1>
   <h2>Page №${storage.winnersPage}</h2>
   <table>

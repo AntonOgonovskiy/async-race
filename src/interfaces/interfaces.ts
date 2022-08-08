@@ -30,9 +30,9 @@ export interface IWinner {
 }
 export interface IWinners {
   page: number,
-  limit: number,
-  sort: string,
-  order: string
+  limit?: number,
+  sort?: string,
+  order?: string
 }
 export interface IRace {
   name?: string;
