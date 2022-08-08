@@ -40,7 +40,7 @@ export function renderWinners() {
   <h2>Page №${storage.winnersPage}</h2>
   <table>
     <thead>
-      <th>ID</th>
+      <th id="sort-id" class = "table-button table-id">ID</th>
       <th>Car</th>
       <th>Name</th>
       <th id="sort-wins" class = "table-button table-win">Wins</th>

@@ -4,7 +4,7 @@ import { changeCar, clearInput, disableUpdateInput, enableUpdateInput, fillInput
 import { storage } from "../model/storage";
 import { renderGarage, renderWinners } from "../view/view";
 import { checkWinner, deleteCar, deleteWinner } from "./api";
-import { updateCarStorage, updateWinnerStorage } from "../model/updateStorage";
+import { setSortOrder, updateCarStorage, updateWinnerStorage } from "../model/updateStorage";
 
 export const engine = () => {
   document.addEventListener('click', (event) => {
@@ -154,6 +154,27 @@ export const selectView = () => {
       winner.style.display = "block";
       garage.style.display = "none";
       checkPageButtons()
+    }
+  })
+}
+export const selectSortAndOrder = () => {
+  document.addEventListener('click', async (event) => {
+    const target = event.target as HTMLButtonElement;
+    const winners = document.querySelector('.winners')
+    if (target.classList.contains('table-id')) {
+      setSortOrder("id");
+      await updateWinnerStorage();
+      if (winners) winners.innerHTML = renderWinners()
+    }
+    if (target.classList.contains('table-time')) {
+      setSortOrder("time");
+      await updateWinnerStorage();
+      if (winners) winners.innerHTML = renderWinners()
+    }
+    if (target.classList.contains('table-win')) {
+      setSortOrder("wins");
+      await updateWinnerStorage();
+      if (winners) winners.innerHTML = renderWinners()
     }
   })
 }

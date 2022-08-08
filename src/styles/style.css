@@ -133,3 +133,7 @@ table {
 td {
   text-align: center;
 }
+
+.table-button {
+  cursor: pointer;
+}
