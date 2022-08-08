@@ -7,6 +7,7 @@ import { disableUpdateInput } from "./model/carsGenerator";
 renderPage()
 checkPageButtons()
 disableUpdateInput()
+listeners.selectView()
 listeners.engine()
 listeners.racing()
 listeners.carUpdater()

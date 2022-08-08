@@ -49,15 +49,26 @@ export async function updateCar(id: number, body: ICarCreate) {
 }
 
 export async function getWinners({ page, limit = 10, sort, order }: IWinners) {
-  const response = await fetch(`${winners}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
+  const response = await fetch(`${winners}?_page=${page}&_limit=${limit}${getSortOrder(sort, order)}`);
+  const items = await response.json()
   return {
-    winners: await response.json(),
+    winners: await Promise.all(
+      items.map(async (winner: { id: number }) => ({ ...winner, car: await getCar(winner.id) }))
+    ),
     count: Number(response.headers.get("X-Total-Count"))
   }
 }
 
+const getSortOrder = (sort: string, order: string): string => {
+  if (sort && order) {
+    return `&_sort=${sort}&_order=${order}`;
+  } else {
+    return "";
+  }
+};
+
 export async function getWinner(id: number) {
-  const response = await fetch(`${winners}/:${id}`);
+  const response = await fetch(`${winners}/${id}`);
   return response.json()
 }
 
@@ -72,14 +83,14 @@ export async function createWinner(body: IWinner) {
 }
 
 export async function deleteWinner(id: number) {
-  const response = await fetch(`${winners}/:${id}`, {
+  const response = await fetch(`${winners}/${id}`, {
     method: 'DELETE',
   })
   return response.json()
 }
 
 export async function updateWinner(id: number, body: IWinner) {
-  const response = await fetch(`${winners}/:${id}`, {
+  const response = await fetch(`${winners}/${id}`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json'

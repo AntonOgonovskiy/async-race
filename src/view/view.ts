@@ -43,8 +43,8 @@ function renderWinners() {
       <th>Number</th>
       <th>Car</th>
       <th>Name</th>
-      <th id="sort-wins" class = "table-button table-win" ${storage.sort === 'wins' ? storage.sortOrder : ''}>Wins</th>
-      <th id="sort-time" class = "table-button table-time" ${storage.sort === 'wins' ? storage.sortOrder : ''}>Time</th>
+      <th id="sort-wins" class = "table-button table-win">Wins</th>
+      <th id="sort-time" class = "table-button table-time">Time</th>
     </thead>
     <tbody>
       ${storage.winners.map((winner, i) => `
@@ -66,7 +66,7 @@ export async function renderPage() {
     <button class="button garage-page-button" id="garage-page-btn">Garage</button>
     <button class="button winner-page-button" id="winner-page-btn">Winners</button>
   </div>
-  <div class="garage">
+  <div class="garage" id="view-garage">
     <div class="car-creator">
       <form class="form" id="create">
         <input class="input" type="text" name="name" id="create-name" autocomplete="off" value='${getRandomName()}'>
@@ -88,8 +88,8 @@ export async function renderPage() {
       ${renderGarage()}
     </div>
   </div>
-  <div class="winners">
-    
+  <div class="winners" id="view-winners">
+  ${renderWinners()}
   </div>
   <div class="pagination">
     <button class="button prev-btn" id="prev-btn">prev</button>

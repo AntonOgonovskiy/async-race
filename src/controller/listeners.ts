@@ -122,3 +122,20 @@ export const pageBtnsCheker = () => {
     }
   })
 }
+export const selectView = () => {
+  document.addEventListener('click', async (event) => {
+    const target = event.target as HTMLButtonElement;
+    const garage = document.getElementById("view-garage") as HTMLElement;
+    const winner = document.getElementById("view-winners") as HTMLElement;
+    if (target?.classList.contains("garage-page-button")) {
+      storage.view = "garage";
+      winner.style.display = "none";
+      garage.style.display = "block";
+    }
+    if (target?.classList.contains("winner-page-button")) {
+      storage.view = "winners";
+      winner.style.display = "block";
+      garage.style.display = "none";
+    }
+  })
+}
