@@ -76,7 +76,7 @@ export async function renderPage() {
       <form class="form" id="update">
         <input class="input" type="text" name="name" id="update-name">
         <input type="color" name="color" id="update-color" value="#ffffff">
-        <button class="button" id="update-btn">Update</button>
+        <button class="button update-car" type="button" id="update-btn">Update</button>
       </form>
     </div>
     <div class="race-control-buttons">
@@ -94,7 +94,7 @@ export async function renderPage() {
   <div class="pagination">
     <button class="button" disabled id="prev-btn">prev</button>
     <button class="button" disabled id="next-btn">next</button>
-  </div> `
+  </div>`
   const html: HTMLElement = document.createElement('div');
   html.innerHTML = page;
   document.body.appendChild(html);

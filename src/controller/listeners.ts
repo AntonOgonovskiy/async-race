@@ -1,7 +1,7 @@
-import { race, startDrive, stopDrive, stopRace } from "../../model/carsDrivers";
-import { makeArrOfCars, makeCar, selectCar, updateCarStorage } from "../../model/carsGenerator";
-import { renderGarage } from "../../view/view";
-import { deleteCar, deleteWinner } from "../api/api";
+import { race, startDrive, stopDrive, stopRace } from "../model/carsDrivers";
+import { changeCar, makeArrOfCars, makeCar, selectCar, updateCarStorage } from "../model/carsGenerator";
+import { renderGarage } from "../view/view";
+import { deleteCar, deleteWinner } from "./api";
 
 export const engine = () => {
   document.addEventListener('click', (event) => {
@@ -48,9 +48,13 @@ export const carUpdater = () => {
     }
     if (target?.classList.contains("update-car-button")) {
       const id = +target.id.split("update-car-")[1];
-      console.log(id)
       selectCar(id);
     }
-
+    if (target?.classList.contains("update-car")) {
+      console.log('hi')
+      await changeCar()
+      await updateCarStorage()
+      if (div) div.innerHTML = renderGarage()
+    }
   })
 }

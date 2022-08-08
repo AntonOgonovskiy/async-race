@@ -1,5 +1,5 @@
-import { ICar, ICarCreate, IWinner, IWinners } from "../../interfaces/interfaces";
-import { storage } from "../../model/storage";
+import { ICar, ICarCreate, IWinner, IWinners } from "../interfaces/interfaces";
+import { storage } from "../model/storage";
 
 const server = 'http://127.0.0.1:3000'
 const garage = `${server}/garage`;
@@ -38,7 +38,7 @@ export async function createCar(body: ICarCreate) {
 }
 
 export async function updateCar(id: number, body: ICarCreate) {
-  const response = await fetch(`${garage}/:${id}`, {
+  const response = await fetch(`${garage}/${id}`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json'
