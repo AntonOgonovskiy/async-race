@@ -39,6 +39,7 @@ export async function stopDrive(id: number) {
 
 export async function race(callback: (id: number) => Promise<ISuccess>) {
   const raceBtn = document.getElementById('race') as HTMLButtonElement;
+  const winnerModal = document.querySelector('.modal-window') as HTMLElement;
   raceBtn.disabled = true;
 
   const promises = storage.cars.map((item) => callback(item.id));
@@ -46,7 +47,9 @@ export async function race(callback: (id: number) => Promise<ISuccess>) {
     promises,
     storage.cars.map((car) => car.id)
   );
-  alert(` Winner is ${winner.name} with time ${winner.time}`);
+  const message = `Winner is ${winner.name} with time ${winner.time}s`;
+  winnerModal.innerText = message;
+  setTimeout(() => winnerModal.innerText = '', 5000)
   return winner;
 }
 

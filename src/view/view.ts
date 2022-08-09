@@ -94,7 +94,9 @@ export async function renderPage() {
   <div class="pagination">
     <button class="button prev-btn" id="prev-btn">prev</button>
     <button class="button next-btn" id="next-btn">next</button>
-  </div>`
+  </div>
+  <p class="modal-window"></p>
+  `
   const html: HTMLElement = document.createElement('div');
   html.innerHTML = page;
   document.body.appendChild(html);

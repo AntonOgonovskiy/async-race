@@ -31,7 +31,7 @@ export const racing = () => {
       stopBtns.disabled = false;
     }
     if (target?.classList.contains("stop-race-btn")) {
-      stopRace();
+      await stopRace();
       checkPageButtons();
     }
   })
