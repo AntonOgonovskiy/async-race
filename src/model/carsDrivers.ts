@@ -22,19 +22,24 @@ export async function startDrive(id: number) {
 }
 
 export async function stopDrive(id: number) {
-  await stopEngine(id);
-  const car = document.getElementById(`car-${id}`) as HTMLElement;
-  car.style.animationPlayState = "paused";
-  const secCar = car.cloneNode(true);
-  car?.parentNode?.replaceChild(secCar, car);
-  const startBtn = document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement;
-  const stopBtn = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
-  startBtn.disabled = false;
-  stopBtn.disabled = true;
+  try {
+    await stopEngine(id);
+    const car = document.getElementById(`car-${id}`) as HTMLElement;
+    car.style.animationPlayState = "paused";
+    const secCar = car.cloneNode(true);
+    car?.parentNode?.replaceChild(secCar, car);
+    const startBtn = document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement;
+    const stopBtn = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  } catch {
+    console.log('This is Error. You are too fast change page, animation did not yet stopped')
+  }
 }
 
 export async function race(callback: (id: number) => Promise<ISuccess>) {
   const raceBtn = document.getElementById('race') as HTMLButtonElement;
+  const winnerModal = document.querySelector('.modal-window') as HTMLElement;
   raceBtn.disabled = true;
 
   const promises = storage.cars.map((item) => callback(item.id));
@@ -42,7 +47,9 @@ export async function race(callback: (id: number) => Promise<ISuccess>) {
     promises,
     storage.cars.map((car) => car.id)
   );
-  alert(` Winner is ${winner.name} with time ${winner.time}`);
+  const message = `Winner is ${winner.name} with time ${winner.time}s`;
+  winnerModal.innerText = message;
+  setTimeout(() => winnerModal.innerText = '', 5000)
   return winner;
 }
 

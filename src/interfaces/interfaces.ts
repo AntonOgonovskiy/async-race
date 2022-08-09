@@ -24,15 +24,15 @@ export interface ICarCreate {
   color: string
 }
 export interface IWinner {
-  id: number,
+  id?: number,
   wins: number,
   time: number
 }
 export interface IWinners {
   page: number,
-  limit: number,
-  sort: string,
-  order: string
+  limit?: number,
+  sort?: string,
+  order?: string
 }
 export interface IRace {
   name?: string;

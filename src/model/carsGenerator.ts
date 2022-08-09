@@ -1,6 +1,5 @@
 import { createCar, getCar, getCars, updateCar } from "../controller/api";
 import { generateCars, getRandomColor, getRandomName } from "./carsCreator";
-import { storage } from "./storage";
 
 let changingCarId: number | null = null;
 
@@ -10,12 +9,6 @@ export async function makeCar() {
   const name = inputName?.value
   const color = inputColor?.value
   await createCar({ name: name, color: color })
-}
-
-export async function updateCarStorage() {
-  const carList = await getCars(storage.garagePage);
-  storage.cars = carList.cars;
-  storage.carsCount = carList.count;
 }
 
 export async function makeArrOfCars() {

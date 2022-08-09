@@ -35,21 +35,21 @@ export function renderGarage() {
   </ul>`
 }
 
-function renderWinners() {
+export function renderWinners() {
   return `<h1>Winners (${storage.winnersCount})</h1>
   <h2>Page №${storage.winnersPage}</h2>
   <table>
     <thead>
-      <th>Number</th>
+      <th id="sort-id" class = "table-button table-id">ID</th>
       <th>Car</th>
       <th>Name</th>
       <th id="sort-wins" class = "table-button table-win">Wins</th>
       <th id="sort-time" class = "table-button table-time">Time</th>
     </thead>
     <tbody>
-      ${storage.winners.map((winner, i) => `
+      ${storage.winners.map((winner) => `
       <tr>
-        <td>${i + 1}</td>
+        <td>${winner.id}</td>
         <td>${createCarImage(winner.car.color)}</td>
         <td>${winner.car.name}</td>
         <td>${winner.wins}</td>
@@ -94,7 +94,9 @@ export async function renderPage() {
   <div class="pagination">
     <button class="button prev-btn" id="prev-btn">prev</button>
     <button class="button next-btn" id="next-btn">next</button>
-  </div>`
+  </div>
+  <p class="modal-window"></p>
+  `
   const html: HTMLElement = document.createElement('div');
   html.innerHTML = page;
   document.body.appendChild(html);

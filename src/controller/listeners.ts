@@ -1,9 +1,10 @@
-import { checkPageButtons } from "../model/pageBtns";
+import { checkPageButtons, disableBtnsWhileRace } from "../model/pageBtns";
 import { race, startDrive, stopDrive, stopRace } from "../model/carsDrivers";
-import { changeCar, clearInput, disableUpdateInput, enableUpdateInput, fillInput, makeArrOfCars, makeCar, selectCar, updateCarStorage } from "../model/carsGenerator";
+import { changeCar, clearInput, disableUpdateInput, enableUpdateInput, fillInput, makeArrOfCars, makeCar, selectCar } from "../model/carsGenerator";
 import { storage } from "../model/storage";
-import { renderGarage } from "../view/view";
-import { deleteCar, deleteWinner } from "./api";
+import { renderGarage, renderWinners } from "../view/view";
+import { checkWinner, deleteCar, deleteWinner } from "./api";
+import { setSortOrder, updateCarStorage, updateWinnerStorage } from "../model/updateStorage";
 
 export const engine = () => {
   document.addEventListener('click', (event) => {
@@ -22,16 +23,15 @@ export const racing = () => {
   document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement
     if (target?.classList.contains("race-btn")) {
-      const prevPage = document.getElementById('prev-btn') as HTMLButtonElement;
-      const nextPage = document.getElementById('next-btn') as HTMLButtonElement;
-      nextPage.disabled = true;
-      prevPage.disabled = true;
-      await race(startDrive);
+      disableBtnsWhileRace()
+      const winner = await race(startDrive);
+      await checkWinner(winner)
+      await updateWinnerStorage()
       const stopBtns = document.getElementById('stop') as HTMLButtonElement;
       stopBtns.disabled = false;
     }
     if (target?.classList.contains("stop-race-btn")) {
-      stopRace();
+      await stopRace();
       checkPageButtons();
     }
   })
@@ -52,6 +52,7 @@ export const carUpdater = () => {
       await deleteCar(id);
       await deleteWinner(id);
       await updateCarStorage();
+      await updateWinnerStorage()
       if (div) div.innerHTML = renderGarage();
       if (storage.garagePage - (storage.carsCount / 7) === 1) {
         storage.garagePage--;
@@ -82,13 +83,20 @@ export const carUpdater = () => {
 export const switchPage = () => {
   document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement;
-    const div = document.querySelector('.cars');
+    const garage = document.querySelector('.cars');
+    const winners = document.querySelector('.winners');
     if (target?.classList.contains("prev-btn")) {
       switch (storage.view) {
         case 'garage': {
           storage.garagePage--;
           await updateCarStorage();
-          if (div) div.innerHTML = renderGarage();
+          if (garage) garage.innerHTML = renderGarage();
+          break;
+        }
+        case 'winners': {
+          storage.winnersPage--;
+          await updateWinnerStorage();
+          if (winners) winners.innerHTML = renderWinners();
           break;
         }
       }
@@ -98,7 +106,13 @@ export const switchPage = () => {
         case 'garage': {
           storage.garagePage++;
           await updateCarStorage();
-          if (div) div.innerHTML = renderGarage();
+          if (garage) garage.innerHTML = renderGarage();
+          break;
+        }
+        case 'winners': {
+          storage.winnersPage++;
+          await updateWinnerStorage();
+          if (winners) winners.innerHTML = renderWinners();
           break;
         }
       }
@@ -135,9 +149,32 @@ export const selectView = () => {
     }
     if (target?.classList.contains("winner-page-button")) {
       storage.view = "winners";
+      const div = document.getElementById('view-winners');
+      if (div) div.innerHTML = renderWinners()
       winner.style.display = "block";
       garage.style.display = "none";
       checkPageButtons()
+    }
+  })
+}
+export const selectSortAndOrder = () => {
+  document.addEventListener('click', async (event) => {
+    const target = event.target as HTMLButtonElement;
+    const winners = document.querySelector('.winners')
+    if (target.classList.contains('table-id')) {
+      setSortOrder("id");
+      await updateWinnerStorage();
+      if (winners) winners.innerHTML = renderWinners()
+    }
+    if (target.classList.contains('table-time')) {
+      setSortOrder("time");
+      await updateWinnerStorage();
+      if (winners) winners.innerHTML = renderWinners()
+    }
+    if (target.classList.contains('table-win')) {
+      setSortOrder("wins");
+      await updateWinnerStorage();
+      if (winners) winners.innerHTML = renderWinners()
     }
   })
 }
