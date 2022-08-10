@@ -64,6 +64,7 @@ export const carUpdater = () => {
     if (target?.classList.contains("list-car")) {
       await makeArrOfCars();
       await updateCarStorage();
+      checkPageButtons();
       if (div) div.innerHTML = renderGarage();
     }
     if (target?.classList.contains("update-car-button")) {
