@@ -39,6 +39,7 @@ export const racing = () => {
 export const carUpdater = () => {
   document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement
+    const nextPage = document.getElementById('next-btn') as HTMLButtonElement;
     const div = document.querySelector('.cars');
     if (target?.classList.contains("create-car")) {
       await makeCar();
@@ -64,7 +65,7 @@ export const carUpdater = () => {
     if (target?.classList.contains("list-car")) {
       await makeArrOfCars();
       await updateCarStorage();
-      checkPageButtons();
+      nextPage.disabled = false;
       if (div) div.innerHTML = renderGarage();
     }
     if (target?.classList.contains("update-car-button")) {
