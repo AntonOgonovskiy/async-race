@@ -13,7 +13,7 @@ export async function makeCar() {
 
 export async function makeArrOfCars() {
   const arr = generateCars();
-  arr.forEach((car) => createCar(car))
+  arr.forEach(async (car) => await createCar(car))
 }
 
 export async function selectCar(id: number) {
