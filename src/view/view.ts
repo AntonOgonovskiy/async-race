@@ -98,6 +98,7 @@ export async function renderPage() {
   <p class="modal-window"></p>
   `
   const html: HTMLElement = document.createElement('div');
+  html.classList.add('main-block')
   html.innerHTML = page;
   document.body.appendChild(html);
 }

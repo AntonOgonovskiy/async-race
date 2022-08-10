@@ -65,8 +65,8 @@ export const carUpdater = () => {
     if (target?.classList.contains("list-car")) {
       await makeArrOfCars();
       await updateCarStorage();
-      nextPage.disabled = false;
       if (div) div.innerHTML = renderGarage();
+      nextPage.disabled = false;
     }
     if (target?.classList.contains("update-car-button")) {
       const id = +target.id.split("update-car-")[1];
@@ -125,10 +125,12 @@ export const pageBtnsCheker = () => {
   document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement;
     if (target?.classList.contains("prev-btn")) {
+      console.log('hi')
       checkPageButtons()
     }
     if (target?.classList.contains("next-btn")) {
       checkPageButtons()
+      console.log('hi')
     }
     if (target?.classList.contains("winner-page-button")) {
       checkPageButtons()
@@ -145,16 +147,20 @@ export const selectView = () => {
     const winner = document.getElementById("view-winners") as HTMLElement;
     if (target?.classList.contains("garage-page-button")) {
       storage.view = "garage";
-      winner.style.display = "none";
-      garage.style.display = "block";
+      winner.style.zIndex = '0';
+      garage.style.zIndex = "1";
+      winner.style.opacity = '0';
+      garage.style.opacity = "1";
       checkPageButtons()
     }
     if (target?.classList.contains("winner-page-button")) {
       storage.view = "winners";
       const div = document.getElementById('view-winners');
       if (div) div.innerHTML = renderWinners()
-      winner.style.display = "block";
-      garage.style.display = "none";
+      winner.style.zIndex = "1";
+      garage.style.zIndex = "0";
+      winner.style.opacity = "1";
+      garage.style.opacity = "0";
       checkPageButtons()
     }
   })

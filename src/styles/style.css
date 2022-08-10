@@ -8,9 +8,18 @@ body {
   margin: 10px;
 }
 
+.main-block {
+  position: relative;
+}
+
 .button {
-  height: 1, 5%;
   text-align: center;
+}
+
+.page-button {
+  position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 .page-button,
@@ -95,7 +104,7 @@ svg {
 }
 
 .rider {
-  position: absolute;
+  position: relative;
   width: 60px;
   margin-right: 0;
   animation-timing-function: linear;
@@ -103,11 +112,12 @@ svg {
 }
 
 .pagination {
+  position: relative;
   margin-top: 20px;
 }
 
 .flag {
-  position: absolute;
+  position: relative;
   right: 90px;
 }
 
@@ -122,7 +132,16 @@ svg {
 }
 
 .winners {
-  display: none;
+  position: absolute;
+  top: 60px;
+  z-index: 0;
+  opacity: 0;
+}
+
+.garage {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
 }
 
 table {
