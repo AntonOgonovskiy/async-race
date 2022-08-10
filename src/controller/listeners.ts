@@ -63,9 +63,9 @@ export const carUpdater = () => {
       checkPageButtons();
     }
     if (target?.classList.contains("list-car")) {
+      nextPage.disabled = false;
       await makeArrOfCars();
       await updateCarStorage();
-      nextPage.disabled = false;
       if (div) div.innerHTML = renderGarage();
     }
     if (target?.classList.contains("update-car-button")) {
