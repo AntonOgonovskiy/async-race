@@ -64,6 +64,7 @@ export const carUpdater = () => {
     }
     if (target?.classList.contains("list-car")) {
       nextPage.disabled = false;
+      console.log('dis')
       await makeArrOfCars();
       await updateCarStorage();
       if (div) div.innerHTML = renderGarage();
