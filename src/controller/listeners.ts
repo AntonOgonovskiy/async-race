@@ -56,7 +56,7 @@ export const carUpdater = () => {
       await updateWinnerStorage()
       if (div) div.innerHTML = renderGarage();
       if (storage.garagePage - (storage.carsCount / 7) === 1) {
-        storage.garagePage--;
+        storage.garagePage > 1 ? storage.garagePage-- : storage.garagePage;
         await updateCarStorage();
         if (div) div.innerHTML = renderGarage();
       }
@@ -125,12 +125,10 @@ export const pageBtnsCheker = () => {
   document.addEventListener('click', async (event) => {
     const target = event.target as HTMLButtonElement;
     if (target?.classList.contains("prev-btn")) {
-      console.log('hi')
       checkPageButtons()
     }
     if (target?.classList.contains("next-btn")) {
       checkPageButtons()
-      console.log('hi')
     }
     if (target?.classList.contains("winner-page-button")) {
       checkPageButtons()

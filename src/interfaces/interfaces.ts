@@ -1,4 +1,5 @@
 export interface ICar {
+  getBoundingClientRect: any;
   id: number;
   name: string;
   color: string;
