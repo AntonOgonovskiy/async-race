@@ -1,4 +1,3 @@
-import { stopDrive } from "./carsDrivers";
 import { storage } from "./storage";
 
 export function checkPageButtons() {
