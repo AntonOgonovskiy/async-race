@@ -1,12 +1,13 @@
 import { getDrive, startEngine, stopEngine } from "../controller/api";
-import { IRace, ISuccess } from "../interfaces/interfaces";
+import { ICar, IRace, ISuccess } from "../interfaces/interfaces";
 import { storage } from "./storage";
 
 export async function startDrive(id: number) {
+  const raceBtn = document.getElementById('race') as HTMLButtonElement;
   const startBtn = document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement;
   const stopBtn = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
   startBtn.disabled = true;
-  stopBtn.disabled = false;
+  raceBtn.disabled === true ? stopBtn.disabled = true : stopBtn.disabled = false;
   const car = document.getElementById(`car-${id}`) as HTMLElement;
   const { velocity, distance } = await startEngine(id);
   const time = Math.floor(distance / velocity);
@@ -41,7 +42,6 @@ export async function race(callback: (id: number) => Promise<ISuccess>) {
   const raceBtn = document.getElementById('race') as HTMLButtonElement;
   const winnerModal = document.querySelector('.modal-window') as HTMLElement;
   raceBtn.disabled = true;
-
   const promises = storage.cars.map((item) => callback(item.id));
   const winner = await raceWinner(
     promises,

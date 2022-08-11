@@ -11,7 +11,7 @@ export function checkPageButtons() {
     case 'garage': {
       garagePage.disabled = true;
       winnerPage.disabled = false;
-      if (garagePages === 1) {
+      if (garagePages === 1 || garagePages === 0) {
         nextPage.disabled = true;
         prevPage.disabled = true;
       } else if (storage.garagePage === 1) {
@@ -29,7 +29,7 @@ export function checkPageButtons() {
     case 'winners': {
       garagePage.disabled = false;
       winnerPage.disabled = true;
-      if (winnersPages === 1) {
+      if (winnersPages === 1 || winnersPages === 0) {
         nextPage.disabled = true;
         prevPage.disabled = true;
       } else if (storage.winnersPage === 1) {
@@ -48,6 +48,7 @@ export function checkPageButtons() {
 
 
 }
+
 export function disableBtnsWhileRace() {
   const prevPage = document.getElementById('prev-btn') as HTMLButtonElement;
   const nextPage = document.getElementById('next-btn') as HTMLButtonElement;
@@ -56,3 +57,4 @@ export function disableBtnsWhileRace() {
   prevPage.disabled = true;
   winners.disabled = true;
 }
+
